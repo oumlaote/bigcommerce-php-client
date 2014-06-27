@@ -74,7 +74,7 @@ class BigcommerceClient
         $url = $baseurl.ltrim($path, '/');
         $query = in_array($method, array('GET','DELETE')) ? $params : array();
         $payload = in_array($method, array('POST','PUT')) ? stripslashes(json_encode($params)) : array();
-        $request_headers = in_array($method, array('POST','PUT')) ? array("Content-Type: application/json; charset=utf-8", 'Expect:') : array();
+        $request_headers = in_array($method, array('POST','PUT')) ? array("Content-Type: application/json", 'Expect:') : array();
 
         $request_headers[] = 'Accept: application/json';
         $request_headers[] = 'X-Auth-Client: ' . $this->client_id;
@@ -136,6 +136,7 @@ class BigcommerceClient
         curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'RC4-SHA');
         curl_setopt($ch, CURLOPT_USERAGENT, 'oumlaote-bigcommerce-php-client');
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
